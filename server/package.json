@@ -1,0 +1,51 @@
+{
+  "name": "splash-finder-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
+    "dev:test": "npm-run-all --parallel dev test:watch",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings=0"
+  },
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv-safe": "^9.0.0",
+    "express": "^5.1.0",
+    "express-session": "^1.17.3",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.1",
+    "mongoose": "^8.5.0",
+    "node-fetch": "^3.3.2",
+    "passport": "^0.7.0",
+    "passport-facebook": "^3.0.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.3",
+    "@types/express": "^5.0.5",
+    "@types/express-session": "^1.17.7",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.0",
+    "@types/passport-facebook": "^3.0.4",
+    "@types/passport-github2": "^1.2.9",
+    "@types/passport-google-oauth20": "^2.0.12",
+    "@types/supertest": "^6.0.3",
+    "eslint": "^9.39.0",
+    "jest": "^30.2.0",
+    "mongodb-memory-server": "^10.1.4",
+    "npm-run-all": "^4.1.5",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.5"
+  }
+}
