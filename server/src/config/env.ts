@@ -3,12 +3,12 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-const serverRoot = path.dirname(fileURLToPath(new URL('../..', import.meta.url)));
+const serverRoot = fileURLToPath(new URL('../..', import.meta.url));
 const envPath = path.join(serverRoot, '.env');
 const examplePath = path.join(serverRoot, '.env.example');
 
-if (fs.existsSync(envPath) && fs.existsSync(examplePath)) {
-  dotenvSafe.config({ path: envPath, example: examplePath, allowEmptyValues: false });
+if (fs.existsSync(envPath)) {
+  dotenvSafe.config({ path: envPath, example: examplePath, allowEmptyValues: true });
 }
 
 type NodeEnv = 'development' | 'test' | 'production';

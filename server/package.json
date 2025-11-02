@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "tsx watch --clear-screen=false src/index.ts",
     "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
     "dev:test": "npm-run-all --parallel dev test:watch",
@@ -16,6 +16,7 @@
   "dependencies": {
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv-safe": "^9.0.0",
     "express": "^5.1.0",
     "express-session": "^1.17.3",
@@ -30,6 +31,8 @@
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
+    "@types/cors": "^2.8.19",
+    "@types/dotenv-safe": "^9.1.0",
     "@types/express": "^5.0.5",
     "@types/express-session": "^1.17.7",
     "@types/jest": "^30.0.0",
@@ -46,6 +49,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "tsx": "^4.7.0"
   }
 }
