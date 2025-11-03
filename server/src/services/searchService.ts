@@ -1,5 +1,6 @@
 import { Types } from 'mongoose';
 import { SearchRecord } from '../models/SearchRecord.js';
+import { clearTopSearchCache } from '../cache/topSearchCache.js';
 import type { UnsplashImage } from '../utils/unsplashClient.js';
 import { searchUnsplash } from '../utils/unsplashClient.js';
 
@@ -34,6 +35,8 @@ export const executeSearch = async ({ term, rawTerm, userId }: ExecuteSearchInpu
     resultCount: result.total,
     unsplashResponse: result.images
   });
+
+  clearTopSearchCache();
 
   return {
     term: displayTerm,

@@ -4,11 +4,14 @@ import { useSearch } from '@/hooks/useSearch';
 import { useSelectionCounter } from '@/hooks/useSelectionCounter';
 import { SearchForm } from '@/components/search/SearchForm';
 import { SearchGrid } from '@/components/search/SearchGrid';
+import { TopSearchBanner } from '@/components/top-searches/TopSearchBanner';
+import { useTopSearches } from '@/hooks/useTopSearches';
 
 export const SearchPage = (): JSX.Element => {
   const { user } = useAuth();
   const searchMutation = useSearch();
   const selection = useSelectionCounter<string>();
+  const topSearchesQuery = useTopSearches();
 
   const images = searchMutation.data?.images ?? [];
 
@@ -34,6 +37,9 @@ export const SearchPage = (): JSX.Element => {
       : searchMutation.error?.message ?? 'Unable to complete the search.'
     : null;
 
+  const topSearchError = topSearchesQuery.isError ? 'Unable to load community searches.' : null;
+  const topSearchTerms = topSearchesQuery.data ?? [];
+
   return (
     <main className="search-page" aria-live="polite">
       <header className="search-page__header">
@@ -45,6 +51,14 @@ export const SearchPage = (): JSX.Element => {
           Selected: {selection.selectedCount} images
         </div>
       </header>
+
+      <section className="search-page__top-searches">
+        <TopSearchBanner
+          terms={topSearchTerms}
+          isLoading={topSearchesQuery.isPending}
+          error={topSearchError}
+        />
+      </section>
 
       <section className="search-page__panel">
         <SearchForm onSubmit={handleSearch} isSubmitting={searchMutation.isPending} />
