@@ -6,12 +6,15 @@ import { SearchForm } from '@/components/search/SearchForm';
 import { SearchGrid } from '@/components/search/SearchGrid';
 import { TopSearchBanner } from '@/components/top-searches/TopSearchBanner';
 import { useTopSearches } from '@/hooks/useTopSearches';
+import { useHistory } from '@/hooks/useHistory';
+import { SearchHistoryPanel } from '@/components/history/SearchHistoryPanel';
 
 export const SearchPage = (): JSX.Element => {
   const { user } = useAuth();
   const searchMutation = useSearch();
   const selection = useSelectionCounter<string>();
   const topSearchesQuery = useTopSearches();
+  const historyQuery = useHistory();
 
   const images = searchMutation.data?.images ?? [];
 
@@ -40,6 +43,9 @@ export const SearchPage = (): JSX.Element => {
   const topSearchError = topSearchesQuery.isError ? 'Unable to load community searches.' : null;
   const topSearchTerms = topSearchesQuery.data ?? [];
 
+  const historyError = historyQuery.isError ? 'Unable to load search history.' : null;
+  const historySearches = historyQuery.data ?? [];
+
   return (
     <main className="search-page" aria-live="polite">
       <header className="search-page__header">
@@ -57,6 +63,14 @@ export const SearchPage = (): JSX.Element => {
           terms={topSearchTerms}
           isLoading={topSearchesQuery.isPending}
           error={topSearchError}
+        />
+      </section>
+
+      <section className="search-page__history">
+        <SearchHistoryPanel
+          searches={historySearches}
+          isLoading={historyQuery.isPending}
+          error={historyError}
         />
       </section>
 
